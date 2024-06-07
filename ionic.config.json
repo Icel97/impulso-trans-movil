@@ -1,0 +1,7 @@
+{
+  "name": "impulso-trans-movil",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
