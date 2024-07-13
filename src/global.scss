@@ -35,3 +35,22 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+.ion-toolbar.trans {
+  --background: var(--ion-color-trans);
+  --color: var(--ion-color-tertiary);
+}
+
+.ion-label.trans {
+  color: var(--ion-color-trans);
+}
+
+ion-input.trans {
+  --color: var(--ion-color-trans);
+  --border-color: var(--ion-color-trans);
+}
+
+ion-button.trans {
+  --background: var(--ion-color-trans);
+  --color: var(--ion-color-tertiary);
+}

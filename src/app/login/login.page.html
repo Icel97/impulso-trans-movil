@@ -1,0 +1,51 @@
+<ion-header collapse="fade" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form class="ion-text-center">
+    <ion-item lines="none" class="ion-margin">
+      <ion-input 
+        label="Correo electrónico"
+        labelPlacement="floating"
+        fill="solid"
+        class="login"
+        type="email" 
+        required>
+      </ion-input>
+    </ion-item>
+
+    <ion-item lines="none" class="ion-margin">
+      <ion-input 
+        label="Contraseña"
+        labelPlacement="floating"
+        fill="solid"
+        class="login"
+        type="password"
+        required>
+        <ion-button fill="clear" slot="end" aria-label="Show/hide" color="dark">
+          <ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </ion-input>
+    </ion-item>
+
+    <ion-button expand="Block" color="primary" type="submit">Iniciar sesión</ion-button>
+
+    <ion-item lines="none" class="ion-text-center">
+      <ion-label><p>o ingresa con:</p></ion-label>
+    </ion-item>
+
+    <ion-button shape="round" color="secondary">
+      <ion-icon slot="icon-only" name="finger-print-outline"></ion-icon>
+    </ion-button>
+
+    <ion-item lines="none" class="ion-text-center">
+      <ion-label>
+        <p>No tienes cuenta?</p>
+        <ion-router-link routerLink="/register">Regístrate!</ion-router-link>
+      </ion-label>
+    </ion-item>
+  </form>
+</ion-content>
