@@ -1,17 +1,54 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-menu contentId="main-content">
+  <app-nav-menu class="menu"></app-nav-menu>
+</ion-menu>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Asesorías</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
-</ion-content>
+  <ion-content [fullscreen]="true" class="ion-text-center">
+    <ion-img
+      src="assets/imgs/asesoria-juridica-texto.png"
+      alt="imagen asesoria juridica"
+      class="logo"
+    ></ion-img>
+
+    <p class="ion-padding-horizontal justified-text">
+      <ion-text>
+        Asesoría jurídica gratuita especializada en derechos de identidades trans, proporcionando herramientas para exigir y garantizar sus derechos
+      </ion-text>
+    </p>
+
+    <ion-card>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <p>
+              <ion-text color="primary">
+                Información sobre reconocimiento de Identidad de género a nivel nacional
+              </ion-text>
+            </p>
+          </ion-item>
+    
+          <ion-item>
+            <p>
+              <ion-text color="primary">
+                Orietación por temas de discriminación y violencias por transfobias
+              </ion-text>
+            </p>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button>
+      Solicitar asesoría
+    </ion-button>
+  </ion-content>
+</div>

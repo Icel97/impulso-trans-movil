@@ -1,0 +1,17 @@
+.logo {
+    width: 45%;
+    height: auto;
+    background-size: contain;
+    margin: 0 auto;
+    display: block;
+    // padding-top: 25vh;
+    margin-bottom: 20px;
+}
+
+#container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}

@@ -54,3 +54,27 @@ ion-button.trans {
   --background: var(--ion-color-trans);
   --color: var(--ion-color-tertiary);
 }
+
+.menu {
+  height: -webkit-fill-available;
+}
+
+.input-item {
+  --background: var(--ion-color-step-50, var(--ion-background-color-step-50, #f2f2f2));
+}
+
+.pt-1 {
+  padding-top: 0.5rem;
+}
+
+.pt-2 {
+  padding-top: 1rem;
+}
+
+.pt-3 {
+  padding-top: 1.5rem;
+}
+
+.pt-4 {
+  padding-top: 2rem;
+}

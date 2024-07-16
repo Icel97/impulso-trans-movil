@@ -3,12 +3,12 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Login</ion-title>
+    <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form class="ion-text-center" (ngSubmit)="login()">
+  <form class="ion-text-center">
     <ion-list>
       <ion-item class="ion-margin input-item pt-2">
         <ion-input 
@@ -32,28 +32,50 @@
           <ion-icon slot="icon-only" name="eye"></ion-icon>
         </ion-button>
       </ion-item>
+
+      <ion-item class="ion-margin input-item pt-1">
+        <ion-input 
+          label="Contraseña"
+          labelPlacement="floating"
+          placeholder="Confirma tu contraseña"
+          type="password"
+          required>
+        </ion-input>
+        <ion-button fill="clear" slot="end" aria-label="Show/hide" color="dark">
+          <ion-icon slot="icon-only" name="eye"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-item class="ion-margin input-item pt-1">
+        <ion-label>Fecha de Nacimiento</ion-label>
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+      </ion-item>
     </ion-list>
 
     <ion-button 
       shape="round"
-      color="primary" 
+      color="secondary" 
       type="submit"
       class="pt-4"
-    >Iniciar sesión</ion-button>
-
-    <ion-item lines="none" class="ion-text-center">
-      <ion-label><p>o ingresa con:</p></ion-label>
-    </ion-item>
-
-    <ion-button shape="round" color="secondary">
-      <ion-icon slot="icon-only" name="finger-print-outline"></ion-icon>
-    </ion-button>
+    >Registrar</ion-button>
 
     <ion-item lines="none" class="ion-text-center pt-2">
       <ion-label>
-        <p>No tienes cuenta?</p>
-        <ion-router-link routerLink="/register">Regístrate!</ion-router-link>
+        <p>Ya tienes cuenta?</p>
+        <ion-router-link routerLink="/login">Inicia sesión!</ion-router-link>
       </ion-label>
     </ion-item>
   </form>
 </ion-content>
+
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime 
+      id="datetime"
+      presentation="date"
+      [showDefaultButtons]="true"
+      doneText="Confirmar"
+      cancelText="Cancelar"
+    ></ion-datetime>
+  </ng-template>
+</ion-modal>

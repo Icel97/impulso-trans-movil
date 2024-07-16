@@ -1,0 +1,42 @@
+<ion-content [fullscreen]="true">
+  <ion-grid id="container">
+    <!-- logo -->
+    <ion-row class="ion-justify-content-end">
+      <ion-col size="12">
+        <ion-img
+        src="assets/imgs/logo_impulso.png"
+        alt="logo impulso trans"
+        class="logo"
+      ></ion-img>
+      </ion-col>
+    </ion-row>
+    <!-- login -->
+    <ion-row>
+      <ion-col size="12" class="ion-text-center ion-padding-horizontal">
+        <ion-button
+          expand="block"
+          shape="round"
+          color="primary"
+          routerLink="/login"
+          routerDirection="forward"
+        >
+          Iniciar sesión
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <!-- registro -->
+    <ion-row>
+      <ion-col size="12" class="ion-text-center ion-padding-horizontal">
+        <ion-button
+          expand="block"
+          shape="round"
+          color="secondary"
+          routerLink="/register"
+          routerDirection="forward"
+        >
+          Regístrate
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

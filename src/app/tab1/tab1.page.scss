@@ -1,0 +1,21 @@
+.logo {
+    width: 65%;
+    height: auto;
+    background-size: contain;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+}
+
+  .justified-text {
+    text-align: justify;
+    margin: 0 16px;
+  }
+
+  ion-card {
+    margin: 16px;
+  }
+
+  ion-item {
+    --inner-padding-end: 0;
+  }
