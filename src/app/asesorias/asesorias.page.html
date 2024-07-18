@@ -1,13 +1,23 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>asesorias</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Agenda tu cita</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">asesorias</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-list class="pt-2">
+    <ion-item>
+      <ion-select aria-label="Fruit" interface="action-sheet" placeholder="Select fruit">
+        <ion-select-option value="1">Orientacion juridica por discriminacion y/o violencias por ser una persona Trans</ion-select-option>
+        <ion-select-option value="2">Orientacioen e infromación sobra actualización de documentos</ion-select-option>
+        <ion-select-option value="3">Servicios de gestoría</ion-select-option>
+        <ion-select-option value="3">Litigio jurídico sin relacion al tema Trans</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <app-calendly-widget></app-calendly-widget>
 </ion-content>
