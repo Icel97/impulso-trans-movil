@@ -18,7 +18,7 @@ export class CalendlyWidgetComponent implements AfterViewInit {
 
   loadCalendlyWidget() {
     Calendly.initInlineWidget({
-      url: 'https://calendly.com/2021171023-uteq',
+      url: 'https://calendly.com/juridicoimpulsotrans/orientacion-juridica-clon-1',
       parentElement: document.getElementById('calendly-widget'),
       prefill: {},
       utm: {}

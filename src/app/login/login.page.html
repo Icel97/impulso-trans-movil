@@ -8,23 +8,28 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form class="ion-text-center" (ngSubmit)="login()">
+  <form class="ion-text-center" (ngSubmit)="login()" [formGroup]="loginForm">
     <ion-list>
       <ion-item class="ion-margin input-item pt-2">
         <ion-input 
           label="Correo electrónico"
           labelPlacement="floating"
+          formControlName="email"
           placeholder="Ingresa tu email"
           type="email"
           required>
         </ion-input>
       </ion-item>
+      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+        Email invalido
+      </ion-note>
   
       <ion-item class="ion-margin input-item pt-1">
         <ion-input 
           label="Contraseña"
           labelPlacement="floating"
           placeholder="Ingresa tu contraseña"
+          formControlName="password"
           type="password"
           required>
         </ion-input>
@@ -32,6 +37,9 @@
           <ion-icon slot="icon-only" name="eye"></ion-icon>
         </ion-button>
       </ion-item>
+      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+        La contraseña es requerida
+      </ion-note>
     </ion-list>
 
     <ion-button 

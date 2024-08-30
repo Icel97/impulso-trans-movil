@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'asesorias',
     loadChildren: () => import('./asesorias/asesorias.module').then( m => m.AsesoriasPageModule)
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   }
 ];
 @NgModule({

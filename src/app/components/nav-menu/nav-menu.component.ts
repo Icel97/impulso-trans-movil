@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,12 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavMenuComponent  implements OnInit {
 
-  constructor() { }
+  constructor(
+    private navCtrl: NavController
+  ) { }
 
   ngOnInit() {}
 
-  navButton() {
-    console.log('navButton()');
+  navButton(section: string) {
+    console.log('section', section);
+    this.navCtrl.navigateForward(`/${section}`);
+  }
+
+  logout() {
+    this.navCtrl.navigateForward('/login');
   }
 
 }

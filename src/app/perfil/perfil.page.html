@@ -1,14 +1,14 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Registro</ion-title>
+    <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form class="ion-text-center" [formGroup]="registerForm" (ngSubmit)="register()">
+  <form class="ion-text-center" [formGroup]="perfilForm" (ngSubmit)="updateUser()" *ngIf="isLoading">
     <ion-list>
       <!-- Nombre -->
       <ion-item class="ion-margin-horizontal input-item pt-2">
@@ -21,8 +21,8 @@
           required>
         </ion-input>
       </ion-item>
-      <ion-note class="ion-no-padding ion-no-margin">
-        Ingresa tu nombre social, no tiene que ser el legal
+      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('lastName')?.invalid && (perfilForm.get('lastName')?.dirty || perfilForm.get('lastName')?.touched)">
+        Ingresa un nombre
       </ion-note>
 
       <!-- Apellidos -->
@@ -36,7 +36,7 @@
           required>
         </ion-input>
       </ion-item>
-      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched)">
+      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('lastName')?.invalid && (perfilForm.get('lastName')?.dirty || perfilForm.get('lastName')?.touched)">
         Apellidos invalidos
       </ion-note>
 
@@ -55,7 +55,7 @@
           <ion-select-option value="0">Prefiero no decir</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="registerForm.get('identidad_genero')?.invalid && (registerForm.get('identidad_genero')?.dirty || registerForm.get('identidad_genero')?.touched)">
+      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('identidad_genero')?.invalid && (perfilForm.get('identidad_genero')?.dirty || perfilForm.get('identidad_genero')?.touched)">
         Selecciona un genero
       </ion-note>
 
@@ -74,7 +74,7 @@
           <ion-select-option value="Preguntar antes">Preguntar antes</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="registerForm.get('pronombre')?.invalid && (registerForm.get('pronombre')?.dirty || registerForm.get('pronombre')?.touched)">
+      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('pronombre')?.invalid && (perfilForm.get('pronombre')?.dirty || perfilForm.get('pronombre')?.touched)">
         Selecciona un pronombre
       </ion-note>
       
@@ -89,44 +89,8 @@
           required>
         </ion-input>
       </ion-item>
-      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
+      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('email')?.invalid && (perfilForm.get('email')?.dirty || perfilForm.get('email')?.touched)">
         Email invalido
-      </ion-note>
-
-      <!-- Contraseña -->
-      <ion-item class="ion-margin input-item pt-1">
-        <ion-input 
-          label="Contraseña"
-          labelPlacement="floating"
-          formControlName="password"
-          placeholder="Ingresa tu contraseña"
-          type="password"
-          required>
-        </ion-input>
-        <ion-button fill="clear" slot="end" aria-label="Show/hide" color="dark">
-          <ion-icon slot="icon-only" name="eye"></ion-icon>
-        </ion-button>
-      </ion-item>
-      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
-        Minimo 8 caracteres
-      </ion-note>
-
-      <!-- Confirmar contraseña -->
-      <ion-item class="ion-margin input-item pt-1">
-        <ion-input 
-          label="Contraseña"
-          labelPlacement="floating"
-          formControlName="password_confirmation"
-          placeholder="Confirma tu contraseña"
-          type="password"
-          required>
-        </ion-input>
-        <ion-button fill="clear" slot="end" aria-label="Show/hide" color="dark">
-          <ion-icon slot="icon-only" name="eye"></ion-icon>
-        </ion-button>
-      </ion-item>
-      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="registerForm.get('password_confirmation')?.invalid && (registerForm.get('password_confirmation')?.dirty || registerForm.get('password_confirmation')?.touched)">
-        Minimo 8 caracteres
       </ion-note>
 
       <ion-item class="ion-margin input-item pt-1">
@@ -153,16 +117,3 @@
     </ion-item>
   </form>
 </ion-content>
-
-<ion-modal [keepContentsMounted]="true">
-  <ng-template>
-    <ion-datetime 
-      id="datetime"
-      presentation="date"
-      [(ngModel)]="date"
-      [showDefaultButtons]="true"
-      doneText="Confirmar"
-      cancelText="Cancelar"
-    ></ion-datetime>
-  </ng-template>
-</ion-modal>
