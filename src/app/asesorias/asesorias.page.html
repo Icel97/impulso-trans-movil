@@ -10,14 +10,33 @@
 <ion-content [fullscreen]="true">
   <ion-list class="pt-2">
     <ion-item>
-      <ion-select aria-label="Fruit" interface="action-sheet" placeholder="Motivo asesoria">
+      <ion-select aria-label="Motivo asesoria" interface="action-sheet" placeholder="Motivo asesoria">
         <ion-select-option value="1">Orientacion juridica por discriminacion y/o violencias por ser una persona Trans</ion-select-option>
         <ion-select-option value="2">Orientacioen e infromación sobra actualización de documentos</ion-select-option>
         <ion-select-option value="3">Servicios de gestoría</ion-select-option>
         <ion-select-option value="3">Litigio jurídico sin relacion al tema Trans</ion-select-option>
       </ion-select>
     </ion-item>
+
+    <!-- Email -->
+    <ion-item class="ion-margin input-item pt-2">
+      <ion-input 
+        label="Correo electrónico"
+        labelPlacement="floating"
+        
+        placeholder="Ingresa tu email"
+        type="email"
+        required>
+      </ion-input>
+    </ion-item>
   </ion-list>
 
   <app-calendly-widget></app-calendly-widget>
+
+  <ion-button 
+  shape="round"
+  color="secondary" 
+  type="submit"
+  class="pt-4"
+  >Confirmar cita</ion-button>
 </ion-content>

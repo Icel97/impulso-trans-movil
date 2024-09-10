@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-nav-menu',
@@ -9,7 +10,8 @@ import { NavController } from '@ionic/angular';
 export class NavMenuComponent  implements OnInit {
 
   constructor(
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private storage: Storage
   ) { }
 
   ngOnInit() {}
@@ -20,6 +22,7 @@ export class NavMenuComponent  implements OnInit {
   }
 
   logout() {
+    this.storage.clear();
     this.navCtrl.navigateForward('/login');
   }
 

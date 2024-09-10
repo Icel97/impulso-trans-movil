@@ -42,18 +42,14 @@
 
       <!-- Genero -->
       <ion-item class="ion-margin input-item pt-2">
-        <ion-select 
-          aria-label="Identidad de genero" 
-          interface="action-sheet" 
+        <ion-input
+          label="Identidad de genero" 
+          labelPlacement="floating"
           placeholder="Selecciona genero"
-          formControlName="identidad_genero">
-          <ion-select-option value="Hombre trans">Hombre trans</ion-select-option>
-          <ion-select-option value="Mujer trans">Mujer trans</ion-select-option>
-          <ion-select-option value="No binario">No binario</ion-select-option>
-          <ion-select-option value="Otro">Otro</ion-select-option>
-          <ion-select-option value="Sin definir">Sin definir</ion-select-option>
-          <ion-select-option value="0">Prefiero no decir</ion-select-option>
-        </ion-select>
+          formControlName="identidad_genero"
+          type="text"
+          required>
+        </ion-input>
       </ion-item>
       <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('identidad_genero')?.invalid && (perfilForm.get('identidad_genero')?.dirty || perfilForm.get('identidad_genero')?.touched)">
         Selecciona un genero
@@ -61,18 +57,14 @@
 
       <!-- Pronombres -->
       <ion-item class="ion-margin input-item pt-2">
-        <ion-select 
-          aria-label="Pronombres" 
-          interface="action-sheet" 
+        <ion-input 
+          label="Pronombres" 
+          labelPlacement="floating"
           placeholder="Selecciona pronombres"
-          formControlName="pronombre">
-          <ion-select-option value="Él">Él</ion-select-option>
-          <ion-select-option value="Ella">Ella</ion-select-option>
-          <ion-select-option value="Elle">Elle</ion-select-option>
-          <ion-select-option value="Otro">Otro</ion-select-option>
-          <ion-select-option value="Ninguno">Ninguno</ion-select-option>
-          <ion-select-option value="Preguntar antes">Preguntar antes</ion-select-option>
-        </ion-select>
+          formControlName="pronombre"
+          type="text"
+          required>
+        </ion-input>
       </ion-item>
       <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('pronombre')?.invalid && (perfilForm.get('pronombre')?.dirty || perfilForm.get('pronombre')?.touched)">
         Selecciona un pronombre
@@ -93,13 +85,48 @@
         Email invalido
       </ion-note>
 
-      <ion-item class="ion-margin input-item pt-1">
-        <ion-label>Fecha de Nacimiento</ion-label>
-        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+      <!-- Telefono -->
+      <ion-item class="ion-margin input-item pt-2">
+        <ion-input 
+          label="Teléfono"
+          labelPlacement="floating"
+          formControlName="telefono"
+          placeholder="Ingresa tu teléfono"
+          maxlength="10"
+          type="tel"
+          required>
+        </ion-input>
       </ion-item>
-      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="!date">
-        Selecciona tu fecha de nacimiento
+      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('telefono')?.invalid && (perfilForm.get('telefono')?.dirty || perfilForm.get('phone')?.touched)">
+        Teléfono invalido
       </ion-note>
+
+      <!-- estado -->
+       <ion-item class="ion-margin input-item pt-2">
+        <ion-select 
+          aria-label="Estado" 
+          interface="action-sheet" 
+          placeholder="Selecciona tu estado de residencia"
+          formControlName="estado"
+          cancelText="Cancelar"
+          (ionChange)="getMunicipios()"
+          required>
+          <ion-select-option *ngFor="let estado of listEstados" [value]="estado.id">{{estado.nombre}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Municipio -->
+      <ion-item class="ion-margin input-item pt-2" *ngIf="listMunicipios && listMunicipios.length > 0">
+        <ion-select 
+          aria-label="Municipio" 
+          interface="action-sheet" 
+          placeholder="Selecciona tu municipio de residencia"
+          formControlName="municipio"
+          cancelText="Cancelar"
+          required>
+          <ion-select-option *ngFor="let municipio of listMunicipios" [value]="municipio.id">{{municipio.nombre}}</ion-select-option>
+        </ion-select>
+      </ion-item>
     </ion-list>
 
     <ion-button 
@@ -107,13 +134,6 @@
       color="secondary" 
       type="submit"
       class="pt-4"
-    >Registrar</ion-button>
-
-    <ion-item lines="none" class="ion-text-center pt-2">
-      <ion-label>
-        <p>Ya tienes cuenta?</p>
-        <ion-router-link routerLink="/login">Inicia sesión!</ion-router-link>
-      </ion-label>
-    </ion-item>
+    >Actualizar datos</ion-button>
   </form>
 </ion-content>

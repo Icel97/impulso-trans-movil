@@ -65,10 +65,15 @@ export class ApisService {
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.error('API Error:', error);
     let errorMessage = 'Algo salió mal con la solicitud a la API.';
-    if (error.error && error.error.message) {
-      errorMessage = `Error: ${error.status} - ${error.error.message}`;
+    let fieldErrors = {};
+
+    if (error.error && error.error.errors) {
+        fieldErrors = error.error.errors;
+        errorMessage = `Errores: ${JSON.stringify(fieldErrors)}`;
+    } else if (error.error && error.error.message) {
+        errorMessage = `Error: ${error.status} - ${error.error.message}`;
     } else if (error.message) {
-      errorMessage = `Error: ${error.status} - ${error.message}`;
+        errorMessage = `Error: ${error.status} - ${error.message}`;
     }
     this.common.showAlert('Error', errorMessage);
     return throwError(() => new Error(errorMessage));

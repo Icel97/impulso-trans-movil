@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ApisService } from '../services/apis/apis.service';
+import { CommonFunctions } from '../utils/commonFuctions';
 
 @Component({
   selector: 'app-register',
@@ -11,19 +13,24 @@ export class RegisterPage implements OnInit {
   registerForm: FormGroup = new FormGroup({});
   validaPassFn: any;
   date: any;
+  showOtherPronounInput = false;
+  showOtherGenderInput = false;
 
   constructor(
     private api: ApisService,
+    private commonUtils: CommonFunctions,
+    private navCtrl: NavController
   ) { }
 
   ngOnInit() {
-    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&].{7,}$/;
+    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
     this.registerForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(35)]),
       lastName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(35)]),
       identidad_genero: new FormControl('', [Validators.required]),
       pronombre: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
+      telefono: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]+$/), Validators.minLength(10), Validators.maxLength(10)]),
       password: new FormControl('', [Validators.required, Validators.pattern(regexPassword), Validators.minLength(8)]),
       password_confirmation: new FormControl('',[Validators.required, Validators.pattern(regexPassword), Validators.minLength(8)])
     }, { validators: this.passwordMatchValidator() });
@@ -40,6 +47,16 @@ export class RegisterPage implements OnInit {
     };
   }
 
+  onPronounChange(event: any) {
+    const selectedValue = event.detail.value;
+    this.showOtherPronounInput = selectedValue === 'Otro';
+  }
+
+  onPronounChangeGender(event: any) {
+    const selectedValue = event.detail.value;
+    this.showOtherGenderInput = selectedValue === 'Otro';
+  }
+
   markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach(control => {
       control.markAsTouched();
@@ -54,13 +71,24 @@ export class RegisterPage implements OnInit {
       this.markFormGroupTouched(this.registerForm);
       return;
     }
+
+    if (!this.date) {
+      this.commonUtils.showAlert('Error', 'Debe seleccionar una fecha de nacimiento');
+      return
+    }
     
     const data = this.registerForm.value;
     data.bithday = this.date;
 
     try {
-      const res = await this.api.post('register', data);
-      console.log(res);
+      const res:any = await this.api.post('register', data);
+      console.log('API Response:', res);
+      if (!res.success) {
+        this.commonUtils.showAlert('Error', res.message);
+      } else {
+        this.commonUtils.showAlert('Éxito', res.message);
+        this.navCtrl.navigateRoot('login');
+      }
     } catch (error) {
       console.error(error);
     }

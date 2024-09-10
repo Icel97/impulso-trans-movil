@@ -46,18 +46,29 @@
           aria-label="Identidad de genero" 
           interface="action-sheet" 
           placeholder="Selecciona genero"
-          formControlName="identidad_genero">
+          formControlName="identidad_genero"
+          cancelText="Cancelar"
+          (ionChange)="onPronounChangeGender($event)">
           <ion-select-option value="Hombre trans">Hombre trans</ion-select-option>
           <ion-select-option value="Mujer trans">Mujer trans</ion-select-option>
+          <ion-select-option value="Hombre trans">Hombre cis</ion-select-option>
+          <ion-select-option value="Mujer trans">Mujer cis</ion-select-option>
           <ion-select-option value="No binario">No binario</ion-select-option>
           <ion-select-option value="Otro">Otro</ion-select-option>
-          <ion-select-option value="Sin definir">Sin definir</ion-select-option>
-          <ion-select-option value="0">Prefiero no decir</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="registerForm.get('identidad_genero')?.invalid && (registerForm.get('identidad_genero')?.dirty || registerForm.get('identidad_genero')?.touched)">
         Selecciona un genero
       </ion-note>
+
+      <!-- Input para "Otro" en Genero -->
+      <ion-item class="ion-margin input-item pt-2" *ngIf="showOtherGenderInput">
+        <ion-input 
+          aria-label="Especifica tu genero" 
+          placeholder="Especifica tu genero"
+          formControlName="pronombre">
+        </ion-input>
+      </ion-item>
 
       <!-- Pronombres -->
       <ion-item class="ion-margin input-item pt-2">
@@ -65,18 +76,27 @@
           aria-label="Pronombres" 
           interface="action-sheet" 
           placeholder="Selecciona pronombres"
-          formControlName="pronombre">
+          formControlName="pronombre"
+          cancelText="Cancelar"
+          (ionChange)="onPronounChange($event)">
           <ion-select-option value="Él">Él</ion-select-option>
           <ion-select-option value="Ella">Ella</ion-select-option>
           <ion-select-option value="Elle">Elle</ion-select-option>
           <ion-select-option value="Otro">Otro</ion-select-option>
-          <ion-select-option value="Ninguno">Ninguno</ion-select-option>
-          <ion-select-option value="Preguntar antes">Preguntar antes</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="registerForm.get('pronombre')?.invalid && (registerForm.get('pronombre')?.dirty || registerForm.get('pronombre')?.touched)">
         Selecciona un pronombre
       </ion-note>
+
+      <!-- Input para "Otro" en pronombres -->
+      <ion-item class="ion-margin input-item pt-2" *ngIf="showOtherPronounInput">
+        <ion-input 
+          aria-label="Especifica tu pronombre" 
+          placeholder="Especifica tu pronombre"
+          formControlName="pronombre">
+        </ion-input>
+      </ion-item>
       
       <!-- Email -->
       <ion-item class="ion-margin input-item pt-2">
@@ -91,6 +111,22 @@
       </ion-item>
       <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
         Email invalido
+      </ion-note>
+
+      <!-- Telefono -->
+      <ion-item class="ion-margin input-item pt-1">
+        <ion-input 
+          label="Teléfono"
+          labelPlacement="floating"
+          formControlName="telefono"
+          placeholder="Ingresa tu teléfono"
+          maxlength="10"
+          type="tel"
+          required>
+        </ion-input>
+      </ion-item>
+      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="registerForm.get('telefono')?.invalid && (registerForm.get('telefono')?.dirty || registerForm.get('phone')?.touched)">
+        Teléfono invalido
       </ion-note>
 
       <!-- Contraseña -->
@@ -108,7 +144,7 @@
         </ion-button>
       </ion-item>
       <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
-        Minimo 8 caracteres
+        Minimo 8 caracteres, al menos una mayuscula, una miniscula y un número
       </ion-note>
 
       <!-- Confirmar contraseña -->
@@ -126,7 +162,7 @@
         </ion-button>
       </ion-item>
       <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="registerForm.get('password_confirmation')?.invalid && (registerForm.get('password_confirmation')?.dirty || registerForm.get('password_confirmation')?.touched)">
-        Minimo 8 caracteres
+        Las contraseñas no coinciden
       </ion-note>
 
       <ion-item class="ion-margin input-item pt-1">
