@@ -136,11 +136,11 @@
           labelPlacement="floating"
           formControlName="password"
           placeholder="Ingresa tu contraseña"
-          type="password"
+          [type]="showPassword ? 'text' : 'password'" 
           required>
         </ion-input>
-        <ion-button fill="clear" slot="end" aria-label="Show/hide" color="dark">
-          <ion-icon slot="icon-only" name="eye"></ion-icon>
+        <ion-button fill="clear" slot="end" aria-label="Mostrar/ocultar" color="dark" (click)="togglePasswordVisibility()">
+          <ion-icon [name]="showPassword ? 'eye-off' : 'eye'" slot="icon-only"></ion-icon>
         </ion-button>
       </ion-item>
       <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
@@ -154,11 +154,11 @@
           labelPlacement="floating"
           formControlName="password_confirmation"
           placeholder="Confirma tu contraseña"
-          type="password"
+          [type]="showPasswordConfirmation ? 'text' : 'password'"
           required>
         </ion-input>
-        <ion-button fill="clear" slot="end" aria-label="Show/hide" color="dark">
-          <ion-icon slot="icon-only" name="eye"></ion-icon>
+        <ion-button fill="clear" slot="end" aria-label="Mostrar/ocultar" color="dark" (click)="togglePasswordConfirmationVisibility()">
+          <ion-icon [name]="showPasswordConfirmation ? 'eye-off' : 'eye'" slot="icon-only"></ion-icon>
         </ion-button>
       </ion-item>
       <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="registerForm.get('password_confirmation')?.invalid && (registerForm.get('password_confirmation')?.dirty || registerForm.get('password_confirmation')?.touched)">
@@ -173,6 +173,18 @@
         Selecciona tu fecha de nacimiento
       </ion-note>
     </ion-list>
+
+    <!-- Aceptar términos y condiciones -->
+    <ion-item lines="none">
+      <ion-checkbox slot="start" formControlName="termsAccepted"></ion-checkbox>
+      <ion-label>
+        Acepto los 
+        <ion-text color="primary" (click)="showTerms()">Términos y Condiciones</ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="registerForm.get('termsAccepted')?.invalid && (registerForm.get('termsAccepted')?.dirty || registerForm.get('termsAccepted')?.touched)">
+      Debes aceptar los Términos y Condiciones.
+    </ion-note>
 
     <ion-button 
       shape="round"

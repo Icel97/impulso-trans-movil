@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { FormGroup, FormControl, Validators,  } from '@angular/forms';
 import { ApisService } from '../services/apis/apis.service';
 import { CommonFunctions } from '../utils/commonFuctions';
 import { StorageKeys } from '../utils/storage-keys';
 import { Storage } from '@ionic/storage';
-
 
 @Component({
   selector: 'app-login',
@@ -14,12 +13,14 @@ import { Storage } from '@ionic/storage';
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup = new FormGroup({});
+  showPassword: boolean = false;
 
   constructor(
     private navCtrl: NavController,
     private api: ApisService,
     private common: CommonFunctions,
-    private storage: Storage
+    private storage: Storage,
+    private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {
@@ -37,8 +38,11 @@ export class LoginPage implements OnInit {
       return;
     }
     const data = this.loginForm.value;
+    const loading = await this.loadingCtrl.create({ message: 'Iniciando sesión...' });
     try {
+      loading.present();
       const response: any = await this.api.post('login', data);
+      loading.dismiss();
       console.log(response);
       if (!response.success) {
         this.common.showAlert('Error', response.message);
@@ -53,7 +57,12 @@ export class LoginPage implements OnInit {
       }
     } catch (error) {
       console.error("Error login: ",error);
+      loading.dismiss();
     }
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
 }

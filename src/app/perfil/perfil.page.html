@@ -16,60 +16,75 @@
           label="Nombre (por elección)"
           labelPlacement="floating"
           formControlName="name"
-          placeholder="Ingresa tu email"
+          placeholder="Ingresa tu nombre"
           type="text"
           required>
         </ion-input>
       </ion-item>
-      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('lastName')?.invalid && (perfilForm.get('lastName')?.dirty || perfilForm.get('lastName')?.touched)">
+      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('name')?.invalid && (perfilForm.get('name')?.dirty || perfilForm.get('name')?.touched)">
         Ingresa un nombre
       </ion-note>
-
+    
       <!-- Apellidos -->
       <ion-item class="ion-margin input-item pt-2">
         <ion-input 
           label="Apellidos"
           labelPlacement="floating"
-          formControlName="lastName"
+          formControlName="apellidos"
           placeholder="Ingresa tus apellidos"
           type="text"
           required>
         </ion-input>
       </ion-item>
-      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('lastName')?.invalid && (perfilForm.get('lastName')?.dirty || perfilForm.get('lastName')?.touched)">
-        Apellidos invalidos
+      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('apellidos')?.invalid && (perfilForm.get('apellidos')?.dirty || perfilForm.get('apellidos')?.touched)">
+        Apellidos inválidos
       </ion-note>
-
-      <!-- Genero -->
+    
+      <!-- Identidad de Género -->
       <ion-item class="ion-margin input-item pt-2">
         <ion-input
-          label="Identidad de genero" 
+          label="Identidad de Género" 
           labelPlacement="floating"
-          placeholder="Selecciona genero"
+          placeholder="Selecciona género"
           formControlName="identidad_genero"
           type="text"
           required>
         </ion-input>
       </ion-item>
       <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('identidad_genero')?.invalid && (perfilForm.get('identidad_genero')?.dirty || perfilForm.get('identidad_genero')?.touched)">
-        Selecciona un genero
+        Selecciona un género
       </ion-note>
-
+    
       <!-- Pronombres -->
       <ion-item class="ion-margin input-item pt-2">
         <ion-input 
           label="Pronombres" 
           labelPlacement="floating"
           placeholder="Selecciona pronombres"
-          formControlName="pronombre"
+          formControlName="pronombres"
           type="text"
           required>
         </ion-input>
       </ion-item>
-      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('pronombre')?.invalid && (perfilForm.get('pronombre')?.dirty || perfilForm.get('pronombre')?.touched)">
+      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('pronombres')?.invalid && (perfilForm.get('pronombres')?.dirty || perfilForm.get('pronombres')?.touched)">
         Selecciona un pronombre
       </ion-note>
-      
+    
+      <!-- Fecha de Nacimiento -->
+      <ion-item class="ion-margin input-item pt-2">
+        <ion-input 
+          label="Fecha de Nacimiento" 
+          labelPlacement="floating"
+          formControlName="fecha_nacimiento"
+          placeholder="Ingresa tu fecha de nacimiento"
+          type="date"
+          required>
+        </ion-input>
+      </ion-item>
+      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('fecha_nacimiento')?.invalid && (perfilForm.get('fecha_nacimiento')?.dirty || perfilForm.get('fecha_nacimiento')?.touched)">
+        Fecha de nacimiento inválida
+      </ion-note>
+    
       <!-- Email -->
       <ion-item class="ion-margin input-item pt-2">
         <ion-input 
@@ -82,10 +97,10 @@
         </ion-input>
       </ion-item>
       <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('email')?.invalid && (perfilForm.get('email')?.dirty || perfilForm.get('email')?.touched)">
-        Email invalido
+        Email inválido
       </ion-note>
-
-      <!-- Telefono -->
+    
+      <!-- Teléfono -->
       <ion-item class="ion-margin input-item pt-2">
         <ion-input 
           label="Teléfono"
@@ -97,38 +112,86 @@
           required>
         </ion-input>
       </ion-item>
-      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('telefono')?.invalid && (perfilForm.get('telefono')?.dirty || perfilForm.get('phone')?.touched)">
-        Teléfono invalido
+      <ion-note color="danger" class="ion-no-padding ion-no-margin" *ngIf="perfilForm.get('telefono')?.invalid && (perfilForm.get('telefono')?.dirty || perfilForm.get('telefono')?.touched)">
+        Teléfono inválido
       </ion-note>
-
-      <!-- estado -->
-       <ion-item class="ion-margin input-item pt-2">
+    
+      <!-- Estado -->
+      <ion-item class="ion-margin input-item pt-2">
         <ion-select 
           aria-label="Estado" 
           interface="action-sheet" 
           placeholder="Selecciona tu estado de residencia"
-          formControlName="estado"
+          formControlName="id_estado_residencia"
           cancelText="Cancelar"
           (ionChange)="getMunicipios()"
           required>
           <ion-select-option *ngFor="let estado of listEstados" [value]="estado.id">{{estado.nombre}}</ion-select-option>
         </ion-select>
       </ion-item>
-
+    
       <!-- Municipio -->
       <ion-item class="ion-margin input-item pt-2" *ngIf="listMunicipios && listMunicipios.length > 0">
         <ion-select 
           aria-label="Municipio" 
           interface="action-sheet" 
           placeholder="Selecciona tu municipio de residencia"
-          formControlName="municipio"
+          formControlName="id_municipio_residencia"
           cancelText="Cancelar"
           required>
           <ion-select-option *ngFor="let municipio of listMunicipios" [value]="municipio.id">{{municipio.nombre}}</ion-select-option>
         </ion-select>
       </ion-item>
+    
+      <!-- Discapacidad -->
+      <ion-item class="ion-margin input-item pt-2">
+        <ion-toggle 
+          formControlName="discapacidad"
+          aria-label="Discapacidad">
+          <ion-label>¿Tienes alguna discapacidad?</ion-label>
+        </ion-toggle>
+      </ion-item>
+    
+      <!-- Neurodivergencia -->
+      <ion-item class="ion-margin input-item pt-2">
+        <ion-toggle 
+          formControlName="neurovergencia"
+          aria-label="Neurovergencia">
+          <ion-label>¿Te consideras neurodivergente?</ion-label>
+        </ion-toggle>
+      </ion-item>
+    
+      <!-- Indígena -->
+      <ion-item class="ion-margin input-item pt-2">
+        <ion-toggle 
+          formControlName="indigena"
+          aria-label="Indígena">
+          <ion-label>¿Te identificas como indígena?</ion-label>
+        </ion-toggle>
+      </ion-item>
+    
+      <!-- Afrodescendiente -->
+      <ion-item class="ion-margin input-item pt-2">
+        <ion-toggle 
+          formControlName="afrodescendiente"
+          aria-label="Afrodescendiente">
+          <ion-label>¿Te identificas como afrodescendiente?</ion-label>
+        </ion-toggle>
+      </ion-item>
+    
+      <!-- Foto de Perfil -->
+      <!-- <ion-item class="ion-margin input-item pt-2">
+        <ion-input 
+          label="Foto de Perfil"
+          labelPlacement="floating"
+          formControlName="profile_photo_path"
+          placeholder="Ingresa la URL de tu foto de perfil"
+          type="url">
+        </ion-input>
+      </ion-item> -->
+    
     </ion-list>
-
+    
     <ion-button 
       shape="round"
       color="secondary" 

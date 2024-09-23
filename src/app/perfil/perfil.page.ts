@@ -32,14 +32,21 @@ export class PerfilPage implements OnInit {
     this.idUser = userData.id;
     this.perfilForm = new FormGroup({
       name: new FormControl(userData.name, [Validators.required, Validators.minLength(3), Validators.maxLength(35)]),
-      lastName: new FormControl(userData.lastName, [Validators.required, Validators.minLength(3), Validators.maxLength(35)]),
+      apellidos: new FormControl(userData.apellidos, [Validators.required, Validators.minLength(3), Validators.maxLength(35)]),
       identidad_genero: new FormControl(userData.identidad_genero, [Validators.required]),
-      pronombre: new FormControl(userData.pronombres, [Validators.required]),
+      pronombres: new FormControl(userData.pronombres, [Validators.required]),
       email: new FormControl(userData.email, [Validators.required, Validators.email]),
       telefono: new FormControl(userData.telefono, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
-      estado: new FormControl(userData.estado),
-      municipio: new FormControl(userData.municipio),
+      fecha_nacimiento: new FormControl(userData.fecha_nacimiento, [Validators.required]),
+      id_estado_residencia: new FormControl(userData.id_estado_residencia, [Validators.required]),
+      id_municipio_residencia: new FormControl(userData.id_municipio_residencia),
+      discapacidad: new FormControl(userData.discapacidad),
+      neurovergencia: new FormControl(userData.neurovergencia),
+      indigena: new FormControl(userData.indigena),
+      afrodescendiente: new FormControl(userData.afrodescendiente),
+      profile_photo_path: new FormControl(userData.profile_photo_path)
     });
+    
 
     this.date = userData.bithday;
     await this.getEstados();
@@ -83,7 +90,7 @@ export class PerfilPage implements OnInit {
   async getMunicipios() {
     this.listMunicipios = null; 
     try {
-      const response: any = await this.api.get(`municipios/estado/${this.perfilForm.value.estado}`);
+      const response: any = await this.api.get(`municipios/estado/${this.perfilForm.value.id_estado_residencia}`);
       console.log(response);
       if (!response.success) {
         this.common.showAlert('Error', response.message);

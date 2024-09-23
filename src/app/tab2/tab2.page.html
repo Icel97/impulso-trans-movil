@@ -13,12 +13,29 @@
   </ion-header>
 
   <ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-      <ion-toolbar>
-        <ion-title size="large">Tab 2</ion-title>
-      </ion-toolbar>
-    </ion-header>
-  
-    <app-explore-container name="Tab 2 page"></app-explore-container>
+    <ion-card class="membership-card">
+      <ion-card-header class="card-header">
+        <div class="header-content">
+          <div class="header-text">
+            <ion-card-title>Afiliación Médica</ion-card-title>
+            <ion-card-subtitle>{{dataPerfil.name}} {{dataPerfil.apellidos}}</ion-card-subtitle>
+          </div>
+          <img src="assets/imgs/avatar.png" alt="User Avatar" class="user-avatar">
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="info-text">
+          <p><strong>Pronombres:</strong> {{dataPerfil.pronombres}}</p>
+          <p><strong>Vigencia:</strong> 01/01/2021 - 01/01/2022</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Botones fuera de la tarjeta -->
+    <div class="card-actions m-2">
+      <ion-button color="secondary" expand="block">Renovar</ion-button>
+      <ion-button color="secondary" expand="block">Descargar</ion-button>
+    </div>
   </ion-content>
 </div>
